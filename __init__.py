@@ -29,8 +29,11 @@ bl_info = {
     
 import bpy
 from bpy.types import AddonPreferences
-from . auto_matcap import register_matcap_pcoll, unregister_matcap_pcoll, display_auto_matcap_panel
+from . utils import register_matcap_pcoll, unregister_matcap_pcoll
+from . ui import *
+from . operators import AutoMatcapCollectionGroup
 
+                           
 
 class AutoMatcapPreferences(AddonPreferences):
     bl_idname = __name__
@@ -54,8 +57,10 @@ def register():
     bpy.utils.register_module(__name__)
     register_matcap_pcoll()
     bpy.types.VIEW3D_PT_view3d_shading.append(display_auto_matcap_panel)
+    bpy.types.WindowManager.automatcap_settings = bpy.props.PointerProperty(type=AutoMatcapCollectionGroup)
 
 def unregister():
+    del bpy.types.WindowManager.automatcap_settings
     unregister_matcap_pcoll()
     bpy.types.VIEW3D_PT_view3d_shading.remove(display_auto_matcap_panel)
     bpy.utils.unregister_module(__name__)
