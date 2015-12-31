@@ -9,9 +9,10 @@ matcap_preview_collections = {}
 
 
 def convert_as_icons():
-    
+
+    current_dir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
     user_preferences = bpy.context.user_preferences
-    addon_prefs = user_preferences.addons["auto_matcap"].preferences 
+    addon_prefs = user_preferences.addons[current_dir].preferences
     thumbnails_path = join(addon_prefs.matcaps_path, "Thumbnails")
     
     images_matcaps = [f for f in listdir(addon_prefs.matcaps_path) if isfile(join(addon_prefs.matcaps_path, f))]
@@ -34,8 +35,9 @@ def convert_as_icons():
 
 def save_current_setup():
 
+    current_dir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
     user_preferences = bpy.context.user_preferences
-    addon_prefs = user_preferences.addons["auto_matcap"].preferences 
+    addon_prefs = user_preferences.addons[current_dir].preferences
     pickle_path = join(addon_prefs.matcaps_path, "Backup_of_scene")
     
     if not os.path.exists(pickle_path):
@@ -72,8 +74,9 @@ def save_current_setup():
 def update_matcap_folder(self, context):
     if self.auto_matcap_enabled:
         
+        current_dir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
         user_preferences = bpy.context.user_preferences
-        addon_prefs = user_preferences.addons["auto_matcap"].preferences 
+        addon_prefs = user_preferences.addons[current_dir].preferences
         thumbnails_path = join(addon_prefs.matcaps_path, "Thumbnails")
     
         # Test if "Thumbnails" folder exist. If not, we create it
@@ -119,8 +122,9 @@ def enumPreviewsFromDirectoryItems(self, context):
     if context is None:
         return enum_items
 
+    current_dir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
     user_preferences = bpy.context.user_preferences
-    addon_prefs = user_preferences.addons["auto_matcap"].preferences    
+    addon_prefs = user_preferences.addons[current_dir].preferences    
     directory = join(addon_prefs.matcaps_path, "Thumbnails")
     # Get the preview collection (defined in register func).
     pcoll = matcap_preview_collections["main"]

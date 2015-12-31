@@ -14,8 +14,9 @@ def display_auto_matcap_panel(self, context):
         if not context.selected_objects:
             layout.label("No mesh selected", icon='ERROR')
         else:
+            current_dir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
             user_preferences = bpy.context.user_preferences
-            addon_prefs = user_preferences.addons["auto_matcap"].preferences 
+            addon_prefs = user_preferences.addons[current_dir].preferences
             thumbnails_path = join(addon_prefs.matcaps_path, "Thumbnails")
 
             images_matcaps = [f.split(".")[0] for f in listdir(addon_prefs.matcaps_path) if isfile(join(addon_prefs.matcaps_path, f))]

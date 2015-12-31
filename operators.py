@@ -35,8 +35,9 @@ class SetupMatcap(Operator):
     
     def execute(self, context):
     
+        current_dir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
         user_preferences = bpy.context.user_preferences
-        addon_prefs = user_preferences.addons["auto_matcap"].preferences 
+        addon_prefs = user_preferences.addons[current_dir].preferences
         thumbnails_path = join(addon_prefs.matcaps_path, "Thumbnails")                         
         automatcap_settings = context.window_manager.automatcap_settings
         
@@ -210,8 +211,9 @@ class RemoveMatcap(Operator):
     
     def execute(self, context):
                 
+        current_dir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
         user_preferences = bpy.context.user_preferences
-        addon_prefs = user_preferences.addons["auto_matcap"].preferences 
+        addon_prefs = user_preferences.addons[current_dir].preferences
         thumbnails_path = join(addon_prefs.matcaps_path, "Thumbnails")
         automatcap_settings = context.window_manager.automatcap_settings
         images_matcaps = [f for f in listdir(addon_prefs.matcaps_path) if isfile(join(addon_prefs.matcaps_path, f))]           
@@ -287,8 +289,9 @@ class ChangeMatcapName(Operator):
     bl_options = {'REGISTER'}
     
     def execute(self, context):
+        current_dir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
         user_preferences = bpy.context.user_preferences
-        addon_prefs = user_preferences.addons["auto_matcap"].preferences 
+        addon_prefs = user_preferences.addons[current_dir].preferences
         thumbnails_path = join(addon_prefs.matcaps_path, "Thumbnails")
         automatcap_settings = context.window_manager.automatcap_settings
         new_name = automatcap_settings.new_name
@@ -320,8 +323,9 @@ class RefreshMatcapsFolder(Operator):
     
     def execute(self, context):
         
+        current_dir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
         user_preferences = bpy.context.user_preferences
-        addon_prefs = user_preferences.addons["auto_matcap"].preferences 
+        addon_prefs = user_preferences.addons[current_dir].preferences 
         thumbnails_path = join(addon_prefs.matcaps_path, "Thumbnails")
 
         images_matcaps = [f.split(".")[0] for f in listdir(addon_prefs.matcaps_path) if isfile(join(addon_prefs.matcaps_path, f))]
@@ -349,8 +353,9 @@ class RestoreSetup(Operator):
     
     def execute(self, context):
         
+        current_dir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
         user_preferences = bpy.context.user_preferences
-        addon_prefs = user_preferences.addons["auto_matcap"].preferences 
+        addon_prefs = user_preferences.addons[current_dir].preferences 
         pickle_path = join(addon_prefs.matcaps_path, "Backup_of_scene")
         # read python dict back from the file
         pickle_file = open(join(pickle_path, "backup_setup"), "rb")
