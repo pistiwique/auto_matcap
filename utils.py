@@ -177,7 +177,7 @@ def register_matcap_pcoll():
 def unregister_matcap_pcoll():
     from bpy.types import WindowManager
 
-    del WindowManager.my_previews
+    del WindowManager.matcap_previews
 
     for pcoll in matcap_preview_collections.values():
         bpy.utils.previews.remove(pcoll)
