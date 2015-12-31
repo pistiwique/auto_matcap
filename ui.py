@@ -35,7 +35,12 @@ def display_auto_matcap_panel(self, context):
                     layout.label("Change matcap's name")
                     row = layout.row(align=True)
                     row.prop(automatcap_settings, "new_name", text="")
-                    row.operator("material.change_matcap_name", text="", icon='FILE_TICK')
+                    if automatcap_settings.new_name:
+                        if automatcap_settings.new_name in thumbnails_matcaps:
+                            row = layout.row(align=True)
+                            row.label("\" " + context.window_manager.matcap_previews.split(".png")[0] + " \" already exist", icon='ERROR')
+                        else:  
+                            row.operator("material.change_matcap_name", text="", icon='FILE_TICK')
                     row = layout.row(align=True)
                     row.operator("material.remove_matcap", text="Remove matcap", icon='X')                 
                     row.prop(automatcap_settings, "multi_remove", text = "", icon='FILE_TEXT') 
