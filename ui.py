@@ -38,7 +38,7 @@ def display_auto_matcap_panel(self, context):
                     if automatcap_settings.new_name:
                         if automatcap_settings.new_name in thumbnails_matcaps:
                             row = layout.row(align=True)
-                            row.label("\" " + context.window_manager.matcap_previews.split(".png")[0] + " \" already exist", icon='ERROR')
+                            row.label("\" " + automatcap_settings.new_name + " \" already exist", icon='ERROR')
                         else:  
                             row.operator("material.change_matcap_name", text="", icon='FILE_TICK')
                     row = layout.row(align=True)
