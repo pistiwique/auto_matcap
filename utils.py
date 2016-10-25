@@ -14,8 +14,9 @@ def convert_as_icons():
     user_preferences = bpy.context.user_preferences
     addon_prefs = user_preferences.addons[current_dir].preferences
     thumbnails_path = join(addon_prefs.matcaps_path, "Thumbnails")
+    extentions = (".jpeg", ".jpg", ".png", ".tiff")
     
-    images_matcaps = [f for f in listdir(addon_prefs.matcaps_path) if isfile(join(addon_prefs.matcaps_path, f))]
+    images_matcaps = [f for f in listdir(addon_prefs.matcaps_path) if isfile(join(addon_prefs.matcaps_path, f)) and f.endswith(extentions)]
         
     thumbnails_matcaps = [f for f in listdir(thumbnails_path) if isfile(join(thumbnails_path, f))]  
 
@@ -145,7 +146,7 @@ def enumPreviewsFromDirectoryItems(self, context):
             # generates a thumbnail preview for a file.
             filepath = os.path.join(directory, name)
             thumb = pcoll.load(filepath, filepath, 'IMAGE')
-            enum_items.append((name, name, "", thumb.icon_id, i))
+            enum_items.append((name, name.split(".png")[0], "", thumb.icon_id, i))
 
     pcoll.matcap_previews = enum_items
     pcoll.matcap_previews_dir = directory
