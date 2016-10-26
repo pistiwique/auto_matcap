@@ -18,9 +18,10 @@ def display_auto_matcap_panel(self, context):
             user_preferences = bpy.context.user_preferences
             addon_prefs = user_preferences.addons[current_dir].preferences
             thumbnails_path = join(addon_prefs.matcaps_path, "Thumbnails")
+            extentions = (".jpeg", ".jpg", ".png", ".tiff")
 
-            images_matcaps = [f.split(".")[0] for f in listdir(addon_prefs.matcaps_path) if isfile(join(addon_prefs.matcaps_path, f))]
-            thumbnails_matcaps = [f.split(".")[0] for f in listdir(thumbnails_path) if isfile(join(thumbnails_path, f))]         
+            images_matcaps = [f.split(".")[0] for f in listdir(addon_prefs.matcaps_path) if isfile(join(addon_prefs.matcaps_path, f)) and f .endswith(extentions)]
+            thumbnails_matcaps = [f.split(".")[0] for f in listdir(thumbnails_path) if isfile(join(thumbnails_path, f)) and f .endswith(extentions)]         
             matcap_is_updated = [item for item in images_matcaps if item not in thumbnails_matcaps]
             thumbnail_is_updated = [item for item in thumbnails_matcaps if item not in images_matcaps]
             
